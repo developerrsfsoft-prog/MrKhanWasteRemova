@@ -9,16 +9,25 @@ import { fileURLToPath } from "url"
 import bcrypt from "bcryptjs"
 import { logger } from "./utils.js"
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const DATA_DIR = path.join(__dirname, "data")
-const BACKUP_DIR = path.join(__dirname, "backups")
+const isVercel = Boolean(process.env.VERCEL || process.env.VERCEL_ENV)
+const DATA_DIR = process.env.DATA_DIR || (isVercel ? "/tmp/mrkhan-data" : path.join(__dirname, "data"))
+const BACKUP_DIR = process.env.BACKUP_DIR || (isVercel ? "/tmp/mrkhan-backups" : path.join(__dirname, "backups"))
 
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true })
+let dataDirReady = true
+let backupDirReady = true
+
+function safeMkdir(dir) {
+  try {
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+    return true
+  } catch (err) {
+    logger.error("Directory creation failed", { dir, error: err.message })
+    return false
+  }
 }
-if (!fs.existsSync(BACKUP_DIR)) {
-  fs.mkdirSync(BACKUP_DIR, { recursive: true })
-}
+
+dataDirReady = safeMkdir(DATA_DIR)
+backupDirReady = safeMkdir(BACKUP_DIR)
 
 // -----------------------------------------------------------------------------
 // Write queue (serialises all writes to avoid concurrent JSON corruption)
@@ -37,6 +46,7 @@ function enqueueWrite(fn) {
 // Atomic file helpers
 // -----------------------------------------------------------------------------
 function loadTable(name) {
+  if (!dataDirReady) return []
   const file = path.join(DATA_DIR, `${name}.json`)
   if (fs.existsSync(file)) {
     try { return JSON.parse(fs.readFileSync(file, "utf-8")) } catch { return [] }
@@ -45,6 +55,7 @@ function loadTable(name) {
 }
 
 function saveTableAtomic(name, data) {
+  if (!dataDirReady) return
   const file = path.join(DATA_DIR, `${name}.json`)
   const tmp = file + ".tmp"
   fs.writeFileSync(tmp, JSON.stringify(data, null, 2))
@@ -328,6 +339,7 @@ class JSONDatabase {
   // Backup / Restore
   // -------------------------------------------------------------------------
   backup(tag = "manual") {
+    if (!backupDirReady) throw new Error("Backup storage unavailable in this environment")
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-")
     const backupPath = path.join(BACKUP_DIR, `backup-${tag}-${timestamp}.json`)
     const snapshot = {
@@ -344,6 +356,7 @@ class JSONDatabase {
 
   restore(backupPath) {
     return enqueueWrite(() => {
+      if (!backupDirReady && !fs.existsSync(backupPath)) throw new Error("Backup file not found")
       if (!fs.existsSync(backupPath)) throw new Error("Backup file not found")
       const raw = fs.readFileSync(backupPath, "utf-8")
       const snapshot = JSON.parse(raw)
@@ -358,13 +371,18 @@ class JSONDatabase {
   }
 
   listBackups() {
-    return fs.readdirSync(BACKUP_DIR)
-      .filter(f => f.endsWith(".json"))
-      .map(f => ({
-        filename: f,
-        path: path.join(BACKUP_DIR, f),
-        mtime: fs.statSync(path.join(BACKUP_DIR, f)).mtime.toISOString(),
-      }))
+    if (!backupDirReady) return []
+    try {
+      return fs.readdirSync(BACKUP_DIR)
+        .filter(f => f.endsWith(".json"))
+        .map(f => ({
+          filename: f,
+          path: path.join(BACKUP_DIR, f),
+          mtime: fs.statSync(path.join(BACKUP_DIR, f)).mtime.toISOString(),
+        }))
+    } catch {
+      return []
+    }
   }
 }
 

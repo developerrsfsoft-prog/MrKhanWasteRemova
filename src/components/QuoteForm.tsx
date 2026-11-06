@@ -28,7 +28,7 @@ const blank: Fields = {
 }
 
 const fieldClass =
-  "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/10"
+  "w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/10"
 
 const iconStyle = "w-4 h-4 text-brand shrink-0"
 
@@ -139,12 +139,12 @@ export function QuoteForm({
             : `We'll respond to your message at ${values.email} within 24 hours.`
           }
         </p>
-        <p className="mt-3 text-xs text-muted">
+        <p className="mt-2 text-xs text-muted">
           Or call us now: <a href={`tel:${business.phoneTel}`} className="font-bold text-brand">{business.phoneDisplay}</a>
         </p>
         <button
           type="button"
-          className="mt-5 rounded-full bg-brand px-6 py-2.5 text-sm font-extrabold text-white hover:bg-brand-dark transition-colors"
+          className="mt-3 rounded-full bg-brand px-6 py-2.5 text-sm font-extrabold text-white hover:bg-brand-dark transition-colors"
           onClick={() => {
             setDone(false)
             setValues(blank)
@@ -164,17 +164,17 @@ export function QuoteForm({
       className={
         variant === "hero"
           ? "overflow-hidden rounded-2xl bg-white text-ink shadow-xl border border-line"
-          : "space-y-3"
+          : "space-y-2"
       }
       noValidate
     >
       {variant === "hero" && (
-        <div className="bg-brand px-6 py-5 text-white">
+        <div className="bg-brand px-4 py-3 text-white">
           <h2 className="text-lg font-extrabold">Get a Free Quote</h2>
           {!compact && <p className="mt-1 text-xs text-white/80">Quick, easy, no obligation.</p>}
         </div>
       )}
-      <div className={variant === "hero" ? "space-y-3 px-6 py-5" : "space-y-3"}>
+      <div className={variant === "hero" ? "space-y-2 px-4 py-3" : "space-y-2"}>
         {apiError && (
           <div className="flex items-center gap-2 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600">
             <AlertCircle className="w-4 h-4 shrink-0" />
@@ -194,7 +194,7 @@ export function QuoteForm({
         />
         {errors.name && <span className="mt-1 block text-xs font-medium text-red-500">{errors.name}</span>}
 
-        <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-3">
+        <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-2">
           <Phone className={iconStyle} />
           Phone <span className="text-red-500">*</span>
         </label>
@@ -207,7 +207,7 @@ export function QuoteForm({
         />
         {errors.phone && <span className="mt-1 block text-xs font-medium text-red-500">{errors.phone}</span>}
 
-        <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-3">
+        <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-2">
           <MapPin className={iconStyle} />
           Address <span className="text-red-500">*</span>
         </label>
@@ -236,7 +236,7 @@ export function QuoteForm({
 
         {variant === "message" && (
           <>
-            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-3">
+            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-2">
               <Mail className={iconStyle} />
               Email <span className="text-red-500">*</span>
             </label>
@@ -253,7 +253,7 @@ export function QuoteForm({
 
         {variant === "hero" && (
           <>
-            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-3">
+            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-2">
               Postcode <span className="text-red-500">*</span>
             </label>
             <input
@@ -264,7 +264,7 @@ export function QuoteForm({
             />
             {errors.postcode && <span className="mt-1 block text-xs font-medium text-red-500">{errors.postcode}</span>}
 
-            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-3">
+            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-2">
               Waste Type <span className="text-red-500">*</span>
             </label>
             <select
@@ -281,7 +281,7 @@ export function QuoteForm({
             </select>
             {errors.service && <span className="mt-1 block text-xs font-medium text-red-500">{errors.service}</span>}
 
-            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-3">
+            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-2">
               Collection Date <span className="text-red-500">*</span>
             </label>
             <input
@@ -296,7 +296,7 @@ export function QuoteForm({
 
         {variant === "message" && (
           <>
-            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-3">
+            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-2">
               Message <span className="text-red-500">*</span>
             </label>
             <textarea
@@ -313,7 +313,7 @@ export function QuoteForm({
         <button
           type="submit"
           disabled={submitting}
-          className={`mt-5 w-full rounded-full bg-brand px-6 py-3 text-sm font-extrabold text-white transition-all hover:bg-brand-dark hover:shadow-xl active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed`}
+          className={`mt-3 w-full rounded-full bg-brand px-6 py-3 text-sm font-extrabold text-white transition-all hover:bg-brand-dark hover:shadow-xl active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed`}
         >
           <span className="flex items-center justify-center gap-1.5">
             {submitting ? (
@@ -330,7 +330,7 @@ export function QuoteForm({
           </span>
         </button>
         {variant === "hero" && !apiError && (
-          <p className="mt-4 text-center text-[11px] text-muted">
+          <p className="mt-2 text-center text-[11px] text-muted">
             Your details are submitted securely to our server.
           </p>
         )}
