@@ -21,17 +21,25 @@ html {
   box-sizing: border-box;
   overflow-x: hidden;
   scroll-behavior: smooth;
-}
-
-*, *::before, *::after {
-  box-sizing: inherit;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   font-family: var(--font-sans);
+  font-weight: 400;
   color: var(--color-ink);
   background: #fff;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 button,

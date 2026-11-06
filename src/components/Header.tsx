@@ -47,7 +47,7 @@ export function Header() {
     : "text-sm font-semibold text-ink hover:text-brand"
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className="z-50 lg:sticky lg:top-0">
       <div className="hidden border-b border-line bg-white text-xs text-muted lg:block">
           <div className="wrap flex items-center justify-between py-2">
             <div className="flex items-center gap-5">
@@ -77,6 +77,9 @@ export function Header() {
         <div className="wrap flex h-[72px] items-center justify-between gap-4">
           <Logo light={home} />
           <nav className="hidden items-center gap-6 lg:flex">
+            <NavLink to="/" className={`${link} transition-colors duration-300 border-b-2 border-transparent hover:border-current pb-1`}>
+              Home
+            </NavLink>
             <DesktopMenu label="Services" light={home}>
               {services.map((service) => (
                 <Link
@@ -163,6 +166,9 @@ export function Header() {
               </a>
               <Link to="/contact#quote" className="block rounded-full bg-brand py-3 text-center text-sm font-extrabold text-white">
                 Get a Free Quote
+              </Link>
+              <Link to="/" className="block py-3 font-bold text-navy">
+                Home
               </Link>
               <button type="button" className="flex w-full items-center justify-between py-3 font-bold text-navy" onClick={() => setPanel(panel === "services" ? null : "services")}>
                 Services <ChevronDown className={`h-4 w-4 transition duration-300 text-brand ${panel === "services" ? "rotate-180" : ""}`} />
