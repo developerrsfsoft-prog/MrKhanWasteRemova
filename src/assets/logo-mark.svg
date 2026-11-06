@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="Mr Khan Movers">
+  <rect width="80" height="80" rx="22" fill="#0D2347"/>
+  <path fill="#FBD11E" d="M16 40.5 40 18l24 22.5h-8.2V56H24.2V40.5H16Z"/>
+  <path fill="#0D2347" d="M35.2 44.5h9.6V56h-9.6z"/>
+  <rect x="14" y="56.5" width="52" height="6.2" rx="3.1" fill="#1F75F5"/>
+  <circle cx="27" cy="66.2" r="5.4" fill="#F7F9FC"/>
+  <circle cx="53" cy="66.2" r="5.4" fill="#F7F9FC"/>
+  <circle cx="27" cy="66.2" r="2.1" fill="#0D2347"/>
+  <circle cx="53" cy="66.2" r="2.1" fill="#0D2347"/>
+</svg>
