@@ -185,16 +185,31 @@ export function Home() {
       <section id="reviews" className="bg-soft py-14">
         <div className="wrap">
           <ScrollReveal variant={fadeUp} delay={0.1}>
-            <h2 className="text-center text-3xl font-extrabold text-navy">What Our Customers Say</h2>
+            <div className="flex flex-col items-center gap-2">
+              <h2 className="text-2xl font-extrabold text-navy">What Our Customers Say</h2>
+              <span className="h-0.5 w-16 rounded-full bg-yellow" />
+            </div>
           </ScrollReveal>
           <div className="mt-8 grid gap-4 lg:grid-cols-3">
             {reviews.map((review, index) => (
               <ScrollReveal key={review.name} variant={fadeUp} delay={index * 0.1}>
-                <figure className="rounded-2xl border border-line bg-white p-5">
-                  <span className="text-4xl leading-none text-brand">“</span>
-                  <blockquote className="mt-2 text-sm leading-relaxed text-ink">{review.quote}</blockquote>
-                  <figcaption className="mt-4 text-sm font-bold text-muted">— {review.name}, {review.area}</figcaption>
-                </figure>
+                <motion.figure key={review.name} variants={staggerItem} className="relative group rounded-2xl border border-line bg-white p-6 hover:shadow-lg hover:border-brand/50 transition duration-300">
+                  <div className="absolute top-4 right-4 text-yellow opacity-20 group-hover:opacity-40 transition-opacity">
+                    <span className="text-3xl leading-none">“</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-yellow mb-4">
+                    {[1, 2, 3, 4, 5].map(() => (
+                      <span key="star" className="h-4 w-4" aria-hidden="true">★</span>
+                    ))}
+                  </div>
+                  <blockquote className="text-sm leading-relaxed text-ink italic mb-4">
+                    {review.quote}
+                  </blockquote>
+                  <figcaption className="flex items-center gap-2 text-sm">
+                    <span className="font-bold text-navy">{review.name}</span>
+                    <span className="text-muted">— {review.area}</span>
+                  </figcaption>
+                </motion.figure>
               </ScrollReveal>
             ))}
           </div>

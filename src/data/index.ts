@@ -241,6 +241,7 @@ export type Location = {
   detail: string
   points: string[]
   places?: string[]
+  addresses?: string[]
   metaTitle: string
   metaDescription: string
 }
@@ -261,6 +262,13 @@ export const locations: Location[] = [
       "Furniture, rubbish and clearance loads",
       "Same-day visits when the schedule allows",
     ],
+    addresses: [
+      "Covent Garden, WC2H",
+      "Soho, W1D",
+      "Westminster, SW1A",
+      "Fitzrovia, W1T",
+      "Bloomsbury, WC1A",
+    ],
     metaTitle: "Waste Removal Central London | Mr Khan Waste Removal",
     metaDescription:
       "Waste removal in Central London for homes and offices, with access-managed collections. Call Mr Khan Waste Removal on 07723 600218.",
@@ -280,6 +288,13 @@ export const locations: Location[] = [
       "House, garage and loft clearances",
       "Garden waste and general rubbish",
     ],
+    addresses: [
+      "Camden Town, NW1",
+      "Islington, N1",
+      "Hackney, E8",
+      "Haringey, N8",
+      "Barnet, EN5",
+    ],
     metaTitle: "Waste Removal North London | Mr Khan Waste Removal",
     metaDescription:
       "Waste removal and clearance across North London boroughs for homes, apartments and commercial units.",
@@ -298,6 +313,13 @@ export const locations: Location[] = [
       "Light-industrial premises",
       "Mixed household and commercial loads",
       "Furniture and general rubbish",
+    ],
+    addresses: [
+      "Stratford, E15",
+      "Canary Wharf, E14",
+      "Bethnal Green, E2",
+      "Hackney Wick, E9",
+      "Bow, E3",
     ],
     metaTitle: "Waste Removal East London | Mr Khan Waste Removal",
     metaDescription:
@@ -319,6 +341,13 @@ export const locations: Location[] = [
       "Same-day and next-day visits when available",
     ],
     places: ["Shepherd’s Bush", "Hammersmith", "Ealing", "Acton"],
+    addresses: [
+      "Shepherd’s Bush, W12",
+      "Hammersmith, W6",
+      "Ealing, W5",
+      "Acton, W3",
+      "Chiswick, W4",
+    ],
     metaTitle: "Waste Removal West London | Mr Khan Waste Removal",
     metaDescription:
       "Waste removal in West London, including Shepherd’s Bush, Hammersmith, Ealing and Acton. Quotes from Mr Khan Waste Removal.",
@@ -338,6 +367,13 @@ export const locations: Location[] = [
       "Retail shop clearances",
       "Furniture and general rubbish",
     ],
+    addresses: [
+      "Croydon, CR0",
+      "Brixton, SW9",
+      "Clapham, SW4",
+      "Wimbledon, SW19",
+      "Lewisham, SE13",
+    ],
     metaTitle: "Waste Removal South London | Mr Khan Waste Removal",
     metaDescription:
       "Waste removal in South London for homes, private gardens and retail shops. Call Mr Khan Waste Removal.",
@@ -356,6 +392,13 @@ export const locations: Location[] = [
       "Commuter-belt collections",
       "Locations on the main routes",
       "All of our listed waste services",
+    ],
+    addresses: [
+      "Bromley, BR1",
+      "Enfield, EN1",
+      "Hounslow, TW3",
+      "Croydon, CR0",
+      "Sutton, SM1",
     ],
     metaTitle: "Waste Removal Greater London | Mr Khan Waste Removal",
     metaDescription:

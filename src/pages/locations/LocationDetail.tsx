@@ -53,7 +53,7 @@ export function LocationDetail() {
             </motion.div>
           </Stagger>
           <ScrollReveal variant={fadeUp} delay={0.15}>
-            <QuoteForm />
+            <QuoteForm area={location.slug} />
           </ScrollReveal>
         </div>
       </section>
@@ -136,21 +136,37 @@ export function LocationDetail() {
               </ul>
             </div>
           </ScrollReveal>
-          <motion.img {...hoverScale} src="/images/why-crew.jpg" alt="Collection crew and van" className="h-64 w-full rounded-3xl object-cover" />
+          <motion.img {...hoverScale} src="/images/van.jpg" alt="Collection crew and van" className="h-64 w-full rounded-3xl object-cover" />
         </div>
-        <div className="wrap mt-10">
-          <ScrollReveal variant={fadeUp} delay={0.1}>
-            <h2 className="text-center text-2xl font-extrabold">Trusted by residents</h2>
-          </ScrollReveal>
-          <Stagger className="mt-5 grid gap-4 lg:grid-cols-3">
-            {reviews.map((review) => (
-              <motion.figure key={review.name} variants={staggerItem} className="rounded-2xl border border-line p-4">
-                <blockquote className="text-sm">{review.quote}</blockquote>
-                <figcaption className="mt-2 text-sm font-bold text-muted">{review.name}, {review.area}</figcaption>
-              </motion.figure>
-            ))}
-          </Stagger>
-        </div>
+          <div className="wrap mt-10">
+            <ScrollReveal variant={fadeUp} delay={0.1}>
+              <div className="flex flex-col items-center gap-2">
+                <h2 className="text-2xl font-extrabold text-navy">Trusted by residents</h2>
+                <span className="h-0.5 w-16 rounded-full bg-yellow" />
+              </div>
+            </ScrollReveal>
+            <Stagger className="mt-8 grid gap-4 lg:grid-cols-3">
+              {reviews.map((review) => (
+                <motion.figure key={review.name} variants={staggerItem} className="relative group rounded-2xl border border-line bg-white p-6 hover:shadow-lg hover:border-brand/50 transition duration-300">
+                  <div className="absolute top-4 right-4 text-yellow opacity-20 group-hover:opacity-40 transition-opacity">
+                    <span className="text-3xl leading-none">“</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-yellow mb-3">
+                    {[1, 2, 3, 4, 5].map(() => (
+                      <span key="star" className="h-4 w-4" aria-hidden="true">★</span>
+                    ))}
+                  </div>
+                  <blockquote className="text-sm leading-relaxed text-ink italic mb-4">
+                    {review.quote}
+                  </blockquote>
+                  <figcaption className="flex items-center gap-2 text-sm">
+                    <span className="font-bold text-navy">{review.name}</span>
+                    <span className="text-muted">— {review.area}</span>
+                  </figcaption>
+                </motion.figure>
+              ))}
+            </Stagger>
+          </div>
       </section>
 
       <ScrollReveal variant={fadeUp} delay={0.1}>

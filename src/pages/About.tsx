@@ -72,7 +72,7 @@ export function About() {
               </p>
             </div>
           </ScrollReveal>
-          <motion.img {...hoverScale} src="/images/why-crew.jpg" alt="The collection van and a member of the crew" className="h-80 w-full rounded-3xl object-cover" />
+          <motion.img {...hoverScale} src="/images/van.jpg" alt="The collection van and a member of the crew" className="h-80 w-full rounded-3xl object-cover" />
         </div>
       </section>
 

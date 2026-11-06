@@ -123,7 +123,7 @@ export function Areas() {
             </ScrollReveal>
           </div>
           <div className="overflow-hidden rounded-3xl bg-navy text-white">
-            <motion.img {...hoverScale} src="/images/why-crew.jpg" alt="" className="h-52 w-full object-cover" />
+            <motion.img {...hoverScale} src="/images/van.jpg" alt="" className="h-52 w-full object-cover" />
             <div className="p-6">
               <h2 className="text-2xl font-extrabold">
                 Ready to <span className="text-yellow">clear</span> your space?

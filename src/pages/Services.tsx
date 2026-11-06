@@ -111,7 +111,7 @@ export function Services() {
                 Get Free Quote →
               </Link>
             </div>
-            <motion.img {...hoverScale} src="/images/why-crew.jpg" alt="Crew member beside the collection van" className="h-56 w-full object-cover lg:h-full" />
+            <motion.img {...hoverScale} src="/images/van.jpg" alt="Crew member beside the collection van" className="h-56 w-full object-cover lg:h-full" />
           </div>
         </section>
       </ScrollReveal>

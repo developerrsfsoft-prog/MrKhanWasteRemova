@@ -48,8 +48,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      {!home && (
-        <div className="hidden border-b border-line bg-white text-xs text-muted lg:block">
+      <div className="hidden border-b border-line bg-white text-xs text-muted lg:block">
           <div className="wrap flex items-center justify-between py-2">
             <div className="flex items-center gap-5">
               <a href={`tel:${business.phoneTel}`} className="inline-flex items-center gap-1.5 font-semibold text-ink">
@@ -73,7 +72,6 @@ export function Header() {
             </span>
           </div>
         </div>
-      )}
 
       <div className={home ? "bg-brand shadow-sm" : "border-b border-line bg-white"}>
         <div className="wrap flex h-[72px] items-center justify-between gap-4">

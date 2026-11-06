@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react"
-import { business, services } from "@/data"
+import { business, getLocation, services } from "@/data"
 
 type Variant = "hero" | "message"
 
@@ -31,13 +31,18 @@ const fieldClass =
 export function QuoteForm({
   variant = "hero",
   compact = false,
+  area,
 }: {
   variant?: Variant
   compact?: boolean
+  area?: string
 }) {
   const [values, setValues] = useState<Fields>(blank)
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>({})
   const [done, setDone] = useState(false)
+
+  const location = area ? getLocation(area) : undefined
+  const addressOptions = location?.addresses ?? []
 
   function set<K extends keyof Fields>(key: K, value: string) {
     setValues((current) => ({ ...current, [key]: value }))
@@ -47,7 +52,11 @@ export function QuoteForm({
     const next: Partial<Record<keyof Fields, string>> = {}
     if (!values.name.trim()) next.name = "Enter your name"
     if (!/^[\d\s+()-]{10,}$/.test(values.phone)) next.phone = "Enter a valid phone number"
-    if (!values.address.trim()) next.address = "Enter your address"
+    if (addressOptions.length > 0) {
+      if (!values.address) next.address = "Select your address"
+    } else if (!values.address.trim()) {
+      next.address = "Enter your address"
+    }
     if (variant === "hero") {
       if (!/^[A-Za-z]{1,2}\d/.test(values.postcode.trim())) next.postcode = "Enter your postcode"
       if (!values.service) next.service = "Select a waste type"
@@ -126,16 +135,35 @@ export function QuoteForm({
           />
           {errors.phone && <span className="mt-1 block font-medium text-red-500">{errors.phone}</span>}
         </label>
-        <label className="block text-xs font-bold text-navy">
-          Address <span className="text-red-500">*</span>
-          <input
-            className={fieldClass}
-            placeholder="Enter your address"
-            value={values.address}
-            onChange={(event) => set("address", event.target.value)}
-          />
-          {errors.address && <span className="mt-1 block font-medium text-red-500">{errors.address}</span>}
-        </label>
+        {addressOptions.length > 0 ? (
+          <label className="block text-xs font-bold text-navy">
+            Address <span className="text-red-500">*</span>
+            <select
+              className={fieldClass}
+              value={values.address}
+              onChange={(event) => set("address", event.target.value)}
+            >
+              <option value="">Select your address</option>
+              {addressOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            {errors.address && <span className="mt-1 block font-medium text-red-500">{errors.address}</span>}
+          </label>
+        ) : (
+          <label className="block text-xs font-bold text-navy">
+            Address <span className="text-red-500">*</span>
+            <input
+              className={fieldClass}
+              placeholder="Enter your address"
+              value={values.address}
+              onChange={(event) => set("address", event.target.value)}
+            />
+            {errors.address && <span className="mt-1 block font-medium text-red-500">{errors.address}</span>}
+          </label>
+        )}
         {variant === "message" && (
           <label className="block text-xs font-bold text-navy">
             Email <span className="text-red-500">*</span>
