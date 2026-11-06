@@ -1,17 +1,30 @@
 import { useState, type FormEvent } from "react"
-import { Mail, ShieldCheck, User } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { Mail, ShieldCheck, User, AlertCircle, Loader2 } from "lucide-react"
 import { motion } from "framer-motion"
 import { Seo, MotionLink, Stagger } from "@/components"
 import { fadeUp, buttonPress } from "@/components/animations"
-import { business } from "@/data"
+import { useAuth } from "@/context/AuthContext"
 
 export function AdminLogin() {
-  const [done, setDone] = useState(false)
+  const { login, user, loading: authLoading } = useAuth()
+  const navigate = useNavigate()
+
   const [values, setValues] = useState({ email: "", password: "" })
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
+  const [apiError, setApiError] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+
+  // If already logged in, redirect
+  if (user && !authLoading) {
+    navigate("/admin", { replace: true })
+    return null
+  }
 
   function set<K extends keyof typeof values>(key: K, value: string) {
-    setValues((current) => ({ ...current, [key]: value }))
+    setValues(current => ({ ...current, [key]: value }))
+    if (errors[key]) setErrors(e => ({ ...e, [key]: undefined }))
+    setApiError("")
   }
 
   function validate() {
@@ -22,34 +35,19 @@ export function AdminLogin() {
     return Object.keys(next).length === 0
   }
 
-  function onSubmit(event: FormEvent) {
+  async function onSubmit(event: FormEvent) {
     event.preventDefault()
     if (!validate()) return
-    setDone(true)
-  }
-
-  if (done) {
-    return (
-      <section className="wrap py-20 text-center">
-        <Seo title="Admin Login | Mr Khan Waste Removal" description="Admin login for Mr Khan Waste Removal." />
-        <div className="mx-auto max-w-md">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand text-white mx-auto mb-6">
-            <ShieldCheck className="w-8 h-8" />
-          </div>
-          <h1 className="text-4xl font-extrabold text-navy mb-2">Access granted</h1>
-          <p className="mt-2 text-sm leading-relaxed text-muted">
-            Welcome back to the {business.legalName} admin panel.
-          </p>
-          <MotionLink
-            {...buttonPress}
-            to="/admin-login"
-            className="mt-6 inline-flex rounded-full bg-brand px-6 py-3 text-sm font-extrabold text-white hover:bg-brand-dark transition-colors"
-          >
-            Sign out
-          </MotionLink>
-        </div>
-      </section>
-    )
+    setSubmitting(true)
+    setApiError("")
+    try {
+      await login(values.email, values.password)
+      navigate("/admin", { replace: true })
+    } catch (err) {
+      setApiError(err instanceof Error ? err.message : "Login failed")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -69,51 +67,59 @@ export function AdminLogin() {
         </Stagger>
 
         <div className="mt-8 mx-auto max-w-md rounded-2xl border border-line bg-white p-6 shadow-sm text-left">
+          {apiError && (
+            <div className="mb-4 flex items-center gap-2 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-600">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              {apiError}
+            </div>
+          )}
+
           <form onSubmit={onSubmit} className="space-y-4" noValidate>
-            <label className="block text-xs font-bold text-navy flex items-center gap-1.5">
-              <User className="w-4 h-4 text-brand shrink-0" />
-              Email address <span className="text-red-500">*</span>
-            </label>
-            <input
-              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/10"
-              placeholder="you@example.com"
-              type="email"
-              value={values.email}
-              onChange={(event) => set("email", event.target.value)}
-            />
-            {errors.email && <span className="mt-1 block font-medium text-red-500">{errors.email}</span>}
-
-            <label className="block text-xs font-bold text-navy flex items-center gap-1.5 mt-4">
-              <Mail className="w-4 h-4 text-brand shrink-0" />
-              Password <span className="text-red-500">*</span>
-            </label>
-            <input
-              className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/10"
-              placeholder="••••••••"
-              type="password"
-              value={values.password}
-              onChange={(event) => set("password", event.target.value)}
-            />
-            {errors.password && <span className="mt-1 block font-medium text-red-500">{errors.password}</span>}
-
-            <div className="mt-4 flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer select-none text-sm text-muted">
-                <input type="checkbox" className="rounded border-slate-200 text-brand focus:ring-brand" />
-                Remember me
+            <div>
+              <label className="block text-xs font-bold text-navy mb-1.5 flex items-center gap-1.5">
+                <User className="w-4 h-4 text-brand shrink-0" />
+                Email address <span className="text-red-500">*</span>
               </label>
-              <MotionLink to="/contact#quote" className="text-sm font-bold text-brand">
-                Forgot password?
-              </MotionLink>
+              <input
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/10"
+                placeholder="admin@example.com"
+                type="email"
+                autoComplete="email"
+                value={values.email}
+                onChange={e => set("email", e.target.value)}
+              />
+              {errors.email && <span className="mt-1 block text-xs font-medium text-red-500">{errors.email}</span>}
             </div>
 
-            <button
+            <div>
+              <label className="block text-xs font-bold text-navy mb-1.5 flex items-center gap-1.5">
+                <Mail className="w-4 h-4 text-brand shrink-0" />
+                Password <span className="text-red-500">*</span>
+              </label>
+              <input
+                className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/10"
+                placeholder="••••••••"
+                type="password"
+                autoComplete="current-password"
+                value={values.password}
+                onChange={e => set("password", e.target.value)}
+              />
+              {errors.password && <span className="mt-1 block text-xs font-medium text-red-500">{errors.password}</span>}
+            </div>
+
+            <motion.button
+              {...buttonPress}
               type="submit"
-              className="mt-6 w-full rounded-full bg-brand px-6 py-3 text-sm font-extrabold text-white transition-all hover:bg-brand-dark hover:shadow-xl active:scale-95"
+              disabled={submitting}
+              className="mt-6 w-full rounded-full bg-brand px-6 py-3 text-sm font-extrabold text-white transition-all hover:bg-brand-dark hover:shadow-xl active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <span className="flex items-center justify-center gap-1.5">
-                Sign in <ShieldCheck className="w-4 h-4" />
+                {submitting
+                  ? <><Loader2 className="w-4 h-4 animate-spin" /> Signing in…</>
+                  : <><ShieldCheck className="w-4 h-4" /> Sign in</>
+                }
               </span>
-            </button>
+            </motion.button>
           </form>
 
           <p className="mt-8 text-center text-sm text-muted">

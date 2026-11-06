@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "name": "Nasir Khan",
+    "email": "admin@mrkhanwasteremovallondon.co.uk",
+    "password": "$2a$10$YG5gdQV7xGAM6RaWFlpu2.kMPJCAO8P98y5nTIKpVZ9nOCBsfJx6i",
+    "role": "admin",
+    "created_at": "2026-11-06T14:03:26.880Z"
+  }
+]

@@ -7,6 +7,7 @@ export { BeforeAfter } from "./BeforeAfter"
 export { Breadcrumb, HomeBreadcrumb } from "./Breadcrumb"
 export { Logo } from "./Logo"
 export { Seo } from "./Seo"
+export { ProtectedRoute } from "./ProtectedRoute"
 export { ScrollReveal, Stagger, MotionLink, AnimatedIcon } from "./animations"
 export type { ScrollRevealProps } from "./animations"
 export {

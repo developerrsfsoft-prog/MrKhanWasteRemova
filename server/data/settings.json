@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "key": "business_name",
+    "value": "Mr Khan Waste Removal",
+    "updated_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 2,
+    "key": "owner",
+    "value": "Nasir Khan",
+    "updated_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 3,
+    "key": "phone",
+    "value": "07723 600218",
+    "updated_at": "2026-11-06T14:19:00.359Z"
+  },
+  {
+    "id": 4,
+    "key": "email",
+    "value": "info@mrkhanwasteremovallondon.co.uk",
+    "updated_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 5,
+    "key": "smtp_host",
+    "value": "smtp.mrkhanwasteremovallondon.co.uk",
+    "updated_at": "2026-11-06T14:42:42.873Z"
+  },
+  {
+    "id": 6,
+    "key": "smtp_port",
+    "value": "587",
+    "updated_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 7,
+    "key": "smtp_encryption",
+    "value": "STARTTLS",
+    "updated_at": "2026-11-06T14:03:26.881Z"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "collection_id": "CL-2001",
+    "customer": "James Wilson",
+    "service": "Furniture Removal",
+    "area": "South London",
+    "address": "12 Wimbledon Park, SW19",
+    "driver": "Nasir Khan",
+    "status": "completed",
+    "date": "Today, 11:00 AM",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 2,
+    "collection_id": "CL-2002",
+    "customer": "Sarah Ahmed",
+    "service": "House Clearance",
+    "area": "North London",
+    "address": "45 Camden High St, N1",
+    "driver": "Ali Raza",
+    "status": "in_progress",
+    "date": "Today, 10:00 AM",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 3,
+    "collection_id": "CL-2003",
+    "customer": "Michael Chen",
+    "service": "Garden Waste",
+    "area": "East London",
+    "address": "78 Stratford Ave, E15",
+    "driver": "Nasir Khan",
+    "status": "scheduled",
+    "date": "Today, 2:00 PM",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 4,
+    "collection_id": "CL-2004",
+    "customer": "Emma Roberts",
+    "service": "Office Clearance",
+    "area": "Central London",
+    "address": "Covent Garden, WC2H",
+    "driver": "Ali Raza",
+    "status": "completed",
+    "date": "Yesterday, 3:00 PM",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 5,
+    "collection_id": "CL-2005",
+    "customer": "David O'Brien",
+    "service": "Garage Clearance",
+    "area": "West London",
+    "address": "Shepherd's Bush, W12",
+    "driver": "Nasir Khan",
+    "status": "pending",
+    "date": "Tomorrow, 9:00 AM",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  }
+]

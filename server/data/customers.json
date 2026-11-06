@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "customer_id": "CU-3001",
+    "name": "James Wilson",
+    "email": "james@example.com",
+    "phone": "07700 123456",
+    "area": "South London",
+    "total_spent": "£420",
+    "orders": 8,
+    "status": "active",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 2,
+    "customer_id": "CU-3002",
+    "name": "Sarah Ahmed",
+    "email": "sarah@example.com",
+    "phone": "07700 234567",
+    "area": "North London",
+    "total_spent": "£310",
+    "orders": 4,
+    "status": "active",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 3,
+    "customer_id": "CU-3003",
+    "name": "Michael Chen",
+    "email": "michael@example.com",
+    "phone": "07700 345678",
+    "area": "East London",
+    "total_spent": "£180",
+    "orders": 3,
+    "status": "active",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 4,
+    "customer_id": "CU-3004",
+    "name": "Emma Roberts",
+    "email": "emma@example.com",
+    "phone": "07700 456789",
+    "area": "Central London",
+    "total_spent": "£650",
+    "orders": 12,
+    "status": "vip",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 5,
+    "customer_id": "CU-3005",
+    "name": "David O'Brien",
+    "email": "david@example.com",
+    "phone": "07700 567890",
+    "area": "West London",
+    "total_spent": "£95",
+    "orders": 2,
+    "status": "active",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 6,
+    "customer_id": "CU-3006",
+    "name": "Lisa Thompson",
+    "email": "lisa@example.com",
+    "phone": "07700 678901",
+    "area": "South London",
+    "total_spent": "£0",
+    "orders": 1,
+    "status": "inactive",
+    "created_at": "2026-11-06T14:03:26.881Z"
+  },
+  {
+    "id": 7,
+    "created_at": "2026-11-06T15:02:09.605Z",
+    "customer_id": "CU-329604",
+    "name": "Jane Contact",
+    "email": "jane@test.com",
+    "phone": "07700 987654",
+    "area": "456 Contact Ave",
+    "total_spent": "£0",
+    "orders": 1,
+    "status": "active"
+  }
+]
