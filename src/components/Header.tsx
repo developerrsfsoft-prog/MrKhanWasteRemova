@@ -153,7 +153,7 @@ export function Header() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-white/10 bg-white lg:hidden"
+            className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-white/30 bg-white/40 backdrop-blur-xl lg:hidden"
           >
             <div className="space-y-2 px-4 py-4">
               <a
@@ -166,13 +166,13 @@ export function Header() {
               <Link to="/contact#quote" className="block rounded-full bg-brand py-3 text-center text-sm font-extrabold text-white">
                 Get a Free Quote
               </Link>
-              <button type="button" className="flex w-full items-center justify-between py-3 font-bold" onClick={() => setPanel(panel === "services" ? null : "services")}>
-                Services <ChevronDown className={`h-4 w-4 transition duration-300 ${panel === "services" ? "rotate-180" : ""}`} />
+              <button type="button" className="flex w-full items-center justify-between py-3 font-bold text-navy" onClick={() => setPanel(panel === "services" ? null : "services")}>
+                Services <ChevronDown className={`h-4 w-4 transition duration-300 text-brand ${panel === "services" ? "rotate-180" : ""}`} />
               </button>
               {panel === "services" && (
                 <>
                   {services.map((service) => (
-                    <Link key={service.slug} to={`/services/${service.slug}`} className="block py-2 pl-3 text-sm text-muted">
+                    <Link key={service.slug} to={`/services/${service.slug}`} className="block py-2 pl-3 text-sm text-ink">
                       {service.navTitle}
                     </Link>
                   ))}
@@ -181,16 +181,16 @@ export function Header() {
                   </Link>
                 </>
               )}
-              <Link to="/about" className="block py-3 font-bold">
+              <Link to="/about" className="block py-3 font-bold text-navy">
                 About
               </Link>
-              <button type="button" className="flex w-full items-center justify-between py-3 font-bold" onClick={() => setPanel(panel === "areas" ? null : "areas")}>
-                Areas We Cover <ChevronDown className={`h-4 w-4 transition duration-300 ${panel === "areas" ? "rotate-180" : ""}`} />
+              <button type="button" className="flex w-full items-center justify-between py-3 font-bold text-navy" onClick={() => setPanel(panel === "areas" ? null : "areas")}>
+                Areas We Cover <ChevronDown className={`h-4 w-4 transition duration-300 text-brand ${panel === "areas" ? "rotate-180" : ""}`} />
               </button>
               {panel === "areas" && (
                 <>
                   {locations.map((location) => (
-                    <Link key={location.slug} to={`/areas/${location.slug}`} className="block py-2 pl-3 text-sm text-muted">
+                    <Link key={location.slug} to={`/areas/${location.slug}`} className="block py-2 pl-3 text-sm text-ink">
                       {location.name}
                     </Link>
                   ))}
@@ -199,7 +199,7 @@ export function Header() {
                   </Link>
                 </>
               )}
-              <Link to="/contact" className="block py-3 font-bold">
+              <Link to="/contact" className="block py-3 font-bold text-navy">
                 Contact
               </Link>
             </div>

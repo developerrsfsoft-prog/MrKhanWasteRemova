@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { BadgeCheck, Clock, Phone, Recycle, ShieldCheck, Star, Users } from "lucide-react"
-import { CTASection, FAQAccordion, ScrollReveal, Stagger, Seo } from "@/components"
+import { CTASection, FAQAccordion, ScrollReveal, Stagger, Seo, AnimatedIcon } from "@/components"
 import { fadeUp, staggerItem, hoverScale, buttonPress, iconPulse } from "@/components/animations"
 import { faqs, locations, reviews } from "@/data"
 
@@ -84,16 +84,13 @@ export function Areas() {
             <div className="rounded-3xl bg-navy p-6 text-white">
               <h2 className="text-2xl font-extrabold">Why Choose Mr Khan Waste Removal?</h2>
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {reasons.map((reason) => {
-                  const MotionIcon = motion(reason.icon)
-                  return (
+                {reasons.map((reason) => (
                     <article key={reason.title} className="rounded-2xl bg-white/10 p-4">
-                      <MotionIcon {...iconPulse} className="h-5 w-5 text-yellow" />
+                      <AnimatedIcon Component={reason.icon} {...iconPulse} className="h-5 w-5 text-yellow" />
                       <h3 className="mt-2 font-extrabold">{reason.title}</h3>
                       <p className="mt-1 text-sm text-white/75">{reason.text}</p>
                     </article>
-                  )
-                })}
+                  ))}
               </div>
             </div>
           </ScrollReveal>

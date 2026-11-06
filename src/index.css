@@ -18,7 +18,13 @@
 }
 
 html {
+  box-sizing: border-box;
+  overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 body {
@@ -37,16 +43,26 @@ textarea {
 
 img {
   max-width: 100%;
+  display: block;
+}
+
+iframe, video, object, embed {
+  max-width: 100%;
+  display: block;
 }
 
 .wrap {
-  width: min(1180px, calc(100% - 2rem));
+  width: 100%;
+  max-width: 1180px;
+  padding-left: 1rem;
+  padding-right: 1rem;
   margin-inline: auto;
 }
 
 @media (min-width: 640px) {
   .wrap {
-    width: min(1180px, calc(100% - 3rem));
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 

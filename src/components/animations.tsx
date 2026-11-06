@@ -1,5 +1,6 @@
 import { useReducedMotion, motion, type Variants, type MotionProps, type TargetAndTransition } from "framer-motion"
 import { Link, useNavigate } from "react-router-dom"
+import { useMemo } from "react"
 
 export const duration = 0.55
 export const ease: [number, number, number, number] = [0.24, 1, 0.32, 1]
@@ -149,4 +150,14 @@ export function MotionLink({ to, children, className, ...props }: MotionLinkProp
       {children}
     </MotionAnchor>
   )
+}
+
+export interface AnimatedIconProps {
+  Component: React.ComponentType<any>
+  className?: string
+}
+
+export function AnimatedIcon({ Component, className, ...props }: AnimatedIconProps) {
+  const MotionComponent = useMemo(() => motion.create(Component), [Component])
+  return <MotionComponent className={className} {...props} />
 }

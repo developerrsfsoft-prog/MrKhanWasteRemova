@@ -6,13 +6,13 @@ import { Logo } from "./Logo"
 export function Footer() {
   return (
     <footer className="bg-[#071833] text-white">
-      <div className="wrap grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-4">
-        <div>
+      <div className="wrap grid gap-10 py-12 text-center sm:text-left md:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
           <Logo light />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/70">
+          <p className="mt-0 max-w-xs text-sm leading-relaxed text-white/70">
             Fast, reliable waste removal for homes and businesses across London.
           </p>
-          <p className="mt-4 text-sm font-semibold text-white/80">Fast. Reliable. Responsible.</p>
+          <p className="mt-0 text-sm font-semibold text-white/80">Fast. Reliable. Responsible.</p>
         </div>
         <div>
           <h2 className="text-sm font-extrabold">Quick Links</h2>
@@ -74,7 +74,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="wrap flex flex-col gap-3 py-4 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="wrap flex flex-col items-center gap-3 py-4 text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p>© {new Date().getFullYear()} {business.legalName}. All rights reserved.</p>
           <div className="flex gap-4">
             <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>

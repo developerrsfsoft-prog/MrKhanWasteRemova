@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Clock, Mail, MapPin, Phone } from "lucide-react"
-import { CTASection, MotionLink, QuoteForm, ScrollReveal, Stagger, Seo } from "@/components"
+import { CTASection, MotionLink, QuoteForm, ScrollReveal, Stagger, Seo, AnimatedIcon } from "@/components"
 import { fadeUp, staggerItem, buttonPress, iconPulse } from "@/components/animations"
 import { business, locations } from "@/data"
 
@@ -69,11 +69,9 @@ export function Contact() {
                 {business.legalName} collects waste across London. {business.owner} is the primary contact. A street address was not supplied, so the base is listed as {business.area}.
               </p>
               <ul className="mt-6 space-y-4">
-                {cards.map((card) => {
-                  const MotionIcon = motion(card.icon)
-                  return (
+                {cards.map((card) => (
                     <li key={card.title} className="flex items-start gap-3">
-                      <MotionIcon {...iconPulse} className="mt-0.5 h-5 w-5 text-brand" />
+                      <AnimatedIcon Component={card.icon} {...iconPulse} className="mt-0.5 h-5 w-5 text-brand" />
                       <div>
                         <p className="text-sm font-extrabold">{card.title}</p>
                         {card.href ? (
@@ -85,8 +83,7 @@ export function Contact() {
                         )}
                       </div>
                     </li>
-                  )
-                })}
+                  ))}
               </ul>
             </div>
           </ScrollReveal>
@@ -110,16 +107,13 @@ export function Contact() {
             <h2 className="text-center text-3xl font-extrabold text-navy">Get in touch</h2>
           </ScrollReveal>
           <Stagger className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {cards.map((card) => {
-              const MotionIcon = motion(card.icon)
-              return (
+            {cards.map((card) => (
                 <motion.article key={card.title} variants={staggerItem} className="rounded-2xl bg-white p-5 text-center shadow-sm">
-                  <MotionIcon {...iconPulse} className="mx-auto h-7 w-7 text-brand" />
+                  <AnimatedIcon Component={card.icon} {...iconPulse} className="mx-auto h-7 w-7 text-brand" />
                   <h3 className="mt-3 font-extrabold">{card.title}</h3>
                   <p className="mt-2 text-sm text-muted">{card.text}</p>
                 </motion.article>
-              )
-            })}
+              ))}
           </Stagger>
         </div>
       </section>

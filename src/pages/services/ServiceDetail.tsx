@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom"
 import { motion } from "framer-motion"
 import { Check, Clock, Home, Recycle, ShieldCheck } from "lucide-react"
-import { Breadcrumb, CTASection, MotionLink, QuoteForm, ScrollReveal, Stagger, Seo } from "@/components"
+import { Breadcrumb, CTASection, MotionLink, QuoteForm, ScrollReveal, Stagger, Seo, AnimatedIcon } from "@/components"
 import { fadeUp, staggerItem, hoverScale, buttonPress, iconPulse } from "@/components/animations"
 import { getService, howItWorksLong, reviews, services } from "@/data"
 
@@ -68,15 +68,12 @@ export function ServiceDetail() {
               { icon: Clock, label: "Same-Day Collection" },
               { icon: Recycle, label: "Eco-Friendly Disposal" },
               { icon: Home, label: "Domestic & Commercial" },
-            ].map((item) => {
-              const MotionIcon = motion(item.icon)
-              return (
+            ].map((item) => (
                 <p key={item.label} className="flex items-center gap-2 text-sm font-bold text-navy">
-                  <MotionIcon {...iconPulse} className="h-5 w-5 text-brand" />
+                  <AnimatedIcon Component={item.icon} {...iconPulse} className="h-5 w-5 text-brand" />
                   {item.label}
                 </p>
-              )
-            })}
+              ))}
           </div>
         </section>
       </ScrollReveal>

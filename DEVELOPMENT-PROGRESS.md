@@ -11,6 +11,12 @@
 - Responsive nav with mobile menu.
 - Client-side validation only.
 - `npm run build` succeeds.
+- **Fixed mobile responsive spacing across all subpages:**
+  - `src/index.css` — replaced `.wrap` `width: calc(100% - Nrem)` with robust `width: 100%; max-width: 1180px; padding-inline: 1rem` (16px on small mobile) and `padding-inline: 1.5rem` at min-width: 640px (24px on larger mobile/tablet). Added `box-sizing: border-box` on `html`/`*` and `max-width: 100%` on `img`/`iframe`/`video`/`object`/`embed` to prevent edge overflow. Added `overflow-x: hidden` on `html` as a safety net (removed from `body`). Removed the `overflow-x: hidden` band-aid from `body` (root cause fixed via containers).
+  - Every page (Home, About, Contact, Areas, Services, ServiceDetail, LocationDetail, Legal/Privacy/Terms/Sitemap/NotFound) and shared components (Header, Footer, QuoteForm, CTASection, BeforeAfter, ServiceCard, LocationCard, ReviewCard, FAQAccordion) use `.wrap`, so they all inherit consistent left/right spacing with no content touching viewport edges.
+- **Fixed mobile responsive spacing across all subpages:**
+  - `src/index.css` — replaced `.wrap` `width: calc(100% - Nrem)` with robust `width: 100%; max-width: 1180px; padding-inline: 1rem` (16px on small mobile) and `padding-inline: 1.5rem` at min-width: 640px (24px on larger mobile/tablet). Added `box-sizing: border-box` on `html`/`*` and `max-width: 100%` on `img`/`iframe`/`video`/`object`/`embed` to prevent edge overflow. Removed the `overflow-x: hidden` band-aid on `body` (root cause fixed via containers).
+  - Every page (Home, About, Contact, Areas, Services, ServiceDetail, LocationDetail, Legal/Privacy/Terms/Sitemap/NotFound) and shared components (Header, Footer, QuoteForm, CTASection, BeforeAfter, ServiceCard, LocationCard, ReviewCard, FAQAccordion) use `.wrap`, so they all inherit consistent left/right spacing with no content touching viewport edges.
 - **Added premium, subtle animations across the site using Framer Motion (already installed):**
   - `src/components/animations.tsx` — shared ScrollReveal, Stagger, MotionLink, hoverLift/hoverScale/buttonPress/iconPulse variants, mobileMenu, accordionContent; professional easing curves; respects prefers-reduced-motion.
   - `src/index.css` — reduced-motion media query disabling transitions/animations.

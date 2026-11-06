@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { Briefcase, Home, Leaf, Recycle, Sofa, Trash2, Warehouse, Layers } from "lucide-react"
-import { CTASection, ScrollReveal, Stagger, Seo } from "@/components"
+import { CTASection, ScrollReveal, Stagger, Seo, AnimatedIcon } from "@/components"
 import { fadeUp, staggerItem, hoverScale, iconPulse } from "@/components/animations"
 import { howItWorksLong, services } from "@/data"
 
@@ -33,14 +33,13 @@ export function Services() {
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {services.map((service, index) => {
               const Icon = icons[index] ?? Trash2
-              const MotionIcon = motion(Icon)
               return (
                 <ScrollReveal key={service.slug} variant={fadeUp} delay={index * 0.05}>
                   <article className="overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition duration-300 hover:shadow-xl">
                     <div className="relative h-40">
                       <motion.img {...hoverScale} src={service.image} alt="" className="h-full w-full object-cover" />
                       <span className="absolute -bottom-5 left-4 grid h-11 w-11 place-items-center rounded-full bg-yellow text-navy shadow">
-                        <MotionIcon {...iconPulse} className="h-5 w-5" />
+                        <AnimatedIcon Component={Icon} {...iconPulse} className="h-5 w-5" />
                       </span>
                     </div>
                     <div className="px-4 pb-5 pt-8">

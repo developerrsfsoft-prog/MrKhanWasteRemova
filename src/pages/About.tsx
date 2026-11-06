@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { CalendarCheck, Check, Leaf, Recycle, ShieldCheck, Users } from "lucide-react"
-import { CTASection, MotionLink, ScrollReveal, Stagger, Seo } from "@/components"
+import { CTASection, MotionLink, ScrollReveal, Stagger, Seo, AnimatedIcon } from "@/components"
 import { fadeUp, staggerItem, hoverScale, buttonPress, iconPulse } from "@/components/animations"
 import { business, locations } from "@/data"
 
@@ -50,14 +50,11 @@ export function About() {
               { icon: ShieldCheck, label: "Fully licensed collections" },
               { icon: CalendarCheck, label: "Same-day collection" },
               { icon: Leaf, label: "Eco-friendly disposal" },
-            ].map((item) => {
-              const MotionIcon = motion(item.icon)
-              return (
+            ].map((item) => (
                 <p key={item.label} className="flex items-center justify-center gap-2 text-sm font-bold">
-                  <MotionIcon {...iconPulse} className="h-5 w-5 text-brand" /> {item.label}
+                  <AnimatedIcon Component={item.icon} {...iconPulse} className="h-5 w-5 text-brand" /> {item.label}
                 </p>
-              )
-            })}
+              ))}
           </div>
         </section>
       </ScrollReveal>

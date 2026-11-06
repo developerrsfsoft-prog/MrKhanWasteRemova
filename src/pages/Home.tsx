@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import { Clock, House, Leaf, ShieldCheck } from "lucide-react"
-import { BeforeAfter, CTASection, FAQAccordion, MotionLink, QuoteForm, ScrollReveal, Stagger, Seo } from "@/components"
+import { BeforeAfter, CTASection, FAQAccordion, MotionLink, QuoteForm, ScrollReveal, Stagger, Seo, AnimatedIcon } from "@/components"
 import { fadeUp, staggerItem, hoverLift, hoverScale, buttonPress, iconPulse } from "@/components/animations"
 import { business, faqs, homeServiceOrder, howItWorksHome, locations, reviews, services } from "@/data"
 
@@ -68,18 +68,15 @@ export function Home() {
       <section className="border-b border-line bg-white">
         <ScrollReveal variant={fadeUp} delay={0.1}>
           <div className="wrap grid grid-cols-2 gap-4 py-5 lg:grid-cols-4">
-            {trust.map((item) => {
-              const MotionIcon = motion(item.icon)
-              return (
+            {trust.map((item) => (
                 <div key={item.title} className="flex items-center gap-3">
-                  <MotionIcon {...iconPulse} className="h-8 w-8 shrink-0 text-brand" />
+                  <AnimatedIcon Component={item.icon} {...iconPulse} className="h-8 w-8 shrink-0 text-brand" />
                   <p className="text-sm font-extrabold leading-tight text-navy">
                     {item.title}
                     <span className="block font-semibold text-muted">{item.detail}</span>
                   </p>
                 </div>
-              )
-            })}
+              ))}
           </div>
         </ScrollReveal>
       </section>

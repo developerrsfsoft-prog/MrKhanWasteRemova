@@ -6,6 +6,7 @@ type Variant = "hero" | "message"
 type Fields = {
   name: string
   phone: string
+  address: string
   postcode: string
   service: string
   date: string
@@ -16,6 +17,7 @@ type Fields = {
 const blank: Fields = {
   name: "",
   phone: "",
+  address: "",
   postcode: "",
   service: "",
   date: "",
@@ -45,6 +47,7 @@ export function QuoteForm({
     const next: Partial<Record<keyof Fields, string>> = {}
     if (!values.name.trim()) next.name = "Enter your name"
     if (!/^[\d\s+()-]{10,}$/.test(values.phone)) next.phone = "Enter a valid phone number"
+    if (!values.address.trim()) next.address = "Enter your address"
     if (variant === "hero") {
       if (!/^[A-Za-z]{1,2}\d/.test(values.postcode.trim())) next.postcode = "Enter your postcode"
       if (!values.service) next.service = "Select a waste type"
@@ -122,6 +125,16 @@ export function QuoteForm({
             onChange={(event) => set("phone", event.target.value)}
           />
           {errors.phone && <span className="mt-1 block font-medium text-red-500">{errors.phone}</span>}
+        </label>
+        <label className="block text-xs font-bold text-navy">
+          Address <span className="text-red-500">*</span>
+          <input
+            className={fieldClass}
+            placeholder="Enter your address"
+            value={values.address}
+            onChange={(event) => set("address", event.target.value)}
+          />
+          {errors.address && <span className="mt-1 block font-medium text-red-500">{errors.address}</span>}
         </label>
         {variant === "message" && (
           <label className="block text-xs font-bold text-navy">
