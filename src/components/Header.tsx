@@ -1,8 +1,10 @@
 import { useEffect, useState, type ReactNode } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
 import { ChevronDown, Mail, MapPin, Menu, Phone, Star, X } from "lucide-react"
+import { AnimatePresence, motion } from "framer-motion"
 import { business, locations, services } from "@/data"
 import { Logo } from "./Logo"
+import { mobileMenu } from "./animations"
 
 function DesktopMenu({
   label,
@@ -20,7 +22,7 @@ function DesktopMenu({
         className={`inline-flex items-center gap-1 text-sm font-semibold ${light ? "text-white" : "text-ink"}`}
       >
         {label}
-        <ChevronDown className="h-4 w-4" />
+        <ChevronDown className="h-4 w-4 transition duration-300" />
       </button>
       <div className="invisible absolute left-0 top-full z-40 w-64 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
         <div className="rounded-2xl border border-line bg-white p-2 text-ink shadow-xl">{children}</div>
@@ -91,7 +93,7 @@ export function Header() {
                 All services
               </Link>
             </DesktopMenu>
-            <NavLink to="/about" className={link}>
+            <NavLink to="/about" className={`${link} transition-colors duration-300 border-b-2 border-transparent hover:border-current pb-1`}>
               About
             </NavLink>
             <DesktopMenu label="Areas We Cover" light={home}>
@@ -108,7 +110,7 @@ export function Header() {
                 All areas
               </Link>
             </DesktopMenu>
-            <NavLink to="/contact" className={link}>
+            <NavLink to="/contact" className={`${link} transition-colors duration-300 border-b-2 border-transparent hover:border-current pb-1`}>
               Contact
             </NavLink>
           </nav>
@@ -144,58 +146,66 @@ export function Header() {
         </div>
       </div>
 
-      {open && (
-        <div className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-white/10 bg-white lg:hidden">
-          <div className="space-y-2 px-4 py-4">
-            <a
-              href={`tel:${business.phoneTel}`}
-              className="flex items-center justify-center gap-2 rounded-full bg-yellow py-3 text-sm font-extrabold text-navy"
-            >
-              <Phone className="h-4 w-4" />
-              {business.phoneDisplay}
-            </a>
-            <Link to="/contact#quote" className="block rounded-full bg-brand py-3 text-center text-sm font-extrabold text-white">
-              Get a Free Quote
-            </Link>
-            <button type="button" className="flex w-full items-center justify-between py-3 font-bold" onClick={() => setPanel(panel === "services" ? null : "services")}>
-              Services <ChevronDown className={`h-4 w-4 ${panel === "services" ? "rotate-180" : ""}`} />
-            </button>
-            {panel === "services" && (
-              <>
-                {services.map((service) => (
-                  <Link key={service.slug} to={`/services/${service.slug}`} className="block py-2 pl-3 text-sm text-muted">
-                    {service.navTitle}
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            variants={mobileMenu}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-white/10 bg-white lg:hidden"
+          >
+            <div className="space-y-2 px-4 py-4">
+              <a
+                href={`tel:${business.phoneTel}`}
+                className="flex items-center justify-center gap-2 rounded-full bg-yellow py-3 text-sm font-extrabold text-navy"
+              >
+                <Phone className="h-4 w-4" />
+                {business.phoneDisplay}
+              </a>
+              <Link to="/contact#quote" className="block rounded-full bg-brand py-3 text-center text-sm font-extrabold text-white">
+                Get a Free Quote
+              </Link>
+              <button type="button" className="flex w-full items-center justify-between py-3 font-bold" onClick={() => setPanel(panel === "services" ? null : "services")}>
+                Services <ChevronDown className={`h-4 w-4 transition duration-300 ${panel === "services" ? "rotate-180" : ""}`} />
+              </button>
+              {panel === "services" && (
+                <>
+                  {services.map((service) => (
+                    <Link key={service.slug} to={`/services/${service.slug}`} className="block py-2 pl-3 text-sm text-muted">
+                      {service.navTitle}
+                    </Link>
+                  ))}
+                  <Link to="/services" className="block py-2 pl-3 text-sm font-bold text-brand">
+                    All services
                   </Link>
-                ))}
-                <Link to="/services" className="block py-2 pl-3 text-sm font-bold text-brand">
-                  All services
-                </Link>
-              </>
-            )}
-            <Link to="/about" className="block py-3 font-bold">
-              About
-            </Link>
-            <button type="button" className="flex w-full items-center justify-between py-3 font-bold" onClick={() => setPanel(panel === "areas" ? null : "areas")}>
-              Areas We Cover <ChevronDown className={`h-4 w-4 ${panel === "areas" ? "rotate-180" : ""}`} />
-            </button>
-            {panel === "areas" && (
-              <>
-                {locations.map((location) => (
-                  <Link key={location.slug} to={`/areas/${location.slug}`} className="block py-2 pl-3 text-sm text-muted">
-                    {location.name}
+                </>
+              )}
+              <Link to="/about" className="block py-3 font-bold">
+                About
+              </Link>
+              <button type="button" className="flex w-full items-center justify-between py-3 font-bold" onClick={() => setPanel(panel === "areas" ? null : "areas")}>
+                Areas We Cover <ChevronDown className={`h-4 w-4 transition duration-300 ${panel === "areas" ? "rotate-180" : ""}`} />
+              </button>
+              {panel === "areas" && (
+                <>
+                  {locations.map((location) => (
+                    <Link key={location.slug} to={`/areas/${location.slug}`} className="block py-2 pl-3 text-sm text-muted">
+                      {location.name}
+                    </Link>
+                  ))}
+                  <Link to="/areas" className="block py-2 pl-3 text-sm font-bold text-brand">
+                    All areas
                   </Link>
-                ))}
-                <Link to="/areas" className="block py-2 pl-3 text-sm font-bold text-brand">
-                  All areas
-                </Link>
-              </>
-            )}
-            <Link to="/contact" className="block py-3 font-bold">
-              Contact
-            </Link>
-          </div>
-        </div>
-      )}
+                </>
+              )}
+              <Link to="/contact" className="block py-3 font-bold">
+                Contact
+              </Link>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   )
 }

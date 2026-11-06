@@ -1,3 +1,6 @@
+import { motion } from "framer-motion"
+import { hoverLift } from "./animations"
+
 interface ServiceCardProps {
   id: string
   title: string
@@ -7,7 +10,7 @@ interface ServiceCardProps {
 
 export function ServiceCard({ id, title, description, priceFrom }: ServiceCardProps) {
   return (
-    <article className="card group">
+    <motion.article {...hoverLift} className="card group transition duration-300 hover:shadow-xl">
       <div className="p-6">
         <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
           <span className="text-lg" aria-hidden="true">{getIcon(id)}</span>
@@ -26,7 +29,7 @@ export function ServiceCard({ id, title, description, priceFrom }: ServiceCardPr
       >
         <div className="absolute inset-0" />
       </a>
-    </article>
+    </motion.article>
   )
 }
 

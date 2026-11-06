@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom"
+import { motion } from "framer-motion"
 import { Phone } from "lucide-react"
 import { business } from "@/data"
+import { MotionLink, buttonPress } from "./animations"
 
 export function CTASection({
   title,
@@ -36,19 +37,13 @@ export function CTASection({
               <p className="mt-1 text-sm text-white/85">{text}</p>
             </div>
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <a
-                href={`tel:${business.phoneTel}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#12315f] px-5 py-3 text-sm font-extrabold"
-              >
+              <motion.a {...buttonPress} href={`tel:${business.phoneTel}`} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#12315f] px-5 py-3 text-sm font-extrabold">
                 <Phone className="h-4 w-4" />
                 Call {business.phoneDisplay}
-              </a>
-              <Link
-                to="/contact#quote"
-                className="inline-flex items-center justify-center rounded-full bg-yellow px-5 py-3 text-sm font-extrabold text-navy"
-              >
+              </motion.a>
+              <MotionLink {...buttonPress} to="/contact#quote" className="inline-flex items-center justify-center rounded-full bg-yellow px-5 py-3 text-sm font-extrabold text-navy">
                 Get a Free Quote →
-              </Link>
+              </MotionLink>
             </div>
           </div>
         </div>

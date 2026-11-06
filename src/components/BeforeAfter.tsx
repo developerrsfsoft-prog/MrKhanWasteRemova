@@ -8,7 +8,7 @@ export function BeforeAfter() {
       <div className="wrap">
         <div className="relative h-64 overflow-hidden rounded-3xl sm:h-80">
           <img src="/images/after.webp" alt="Garden after the waste was cleared" loading="lazy" decoding="async" className="h-full w-full object-cover" />
-          <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}>
+          <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - position}% 0 0)`, transition: "clip-path 0.3s ease" }}>
             <img src="/images/before.webp" alt="Garden before clearance, covered in soil and debris" loading="lazy" decoding="async" className="h-full w-full object-cover" />
           </div>
           <span className="absolute left-4 top-4 rounded-full bg-navy/80 px-3 py-1 text-xs font-bold text-white">Before</span>

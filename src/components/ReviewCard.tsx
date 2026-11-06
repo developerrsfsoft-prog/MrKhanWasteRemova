@@ -1,4 +1,6 @@
 import { Star } from "lucide-react"
+import { motion } from "framer-motion"
+import { hoverLift } from "./animations"
 
 interface ReviewCardProps {
   name: string
@@ -9,7 +11,7 @@ interface ReviewCardProps {
 
 export function ReviewCard({ name, location, rating, text }: ReviewCardProps) {
   return (
-    <article className="card p-6">
+    <motion.article {...hoverLift} className="card p-6 transition duration-300 hover:shadow-md">
       <div className="flex items-center gap-2 mb-3">
         {[1, 2, 3, 4, 5].map((star) => (
           <Star
@@ -26,6 +28,6 @@ export function ReviewCard({ name, location, rating, text }: ReviewCardProps) {
         <span className="font-medium text-navy">{name}</span>
         <span className="text-slate-500">, {location}</span>
       </div>
-    </article>
+    </motion.article>
   )
 }

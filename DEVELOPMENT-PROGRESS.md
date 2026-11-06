@@ -11,6 +11,16 @@
 - Responsive nav with mobile menu.
 - Client-side validation only.
 - `npm run build` succeeds.
+- **Added premium, subtle animations across the site using Framer Motion (already installed):**
+  - `src/components/animations.tsx` — shared ScrollReveal, Stagger, MotionLink, hoverLift/hoverScale/buttonPress/iconPulse variants, mobileMenu, accordionContent; professional easing curves; respects prefers-reduced-motion.
+  - `src/index.css` — reduced-motion media query disabling transitions/animations.
+  - Home: hero fade-up + staggered heading/CTA/form, scroll reveals on sections, cards, reviews, FAQ, CTA; hover lift/scale on cards/images/buttons.
+  - ServiceCard/LocationCard/ReviewCard: translateY(-5px) lift + shadow on hover.
+  - FAQAccordion: smooth open/close with AnimatePresence.
+  - Header: smooth mobile menu open/close, ChevronDown rotate, nav-link underline transitions.
+  - BeforeAfter: smooth slider clip-path transition.
+  - CTASection: button press/scale on hover.
+  - About, Areas, Contact, Services, ServiceDetail, LocationDetail: scroll reveals on headings/cards/reviews/CTAs; button/icon hover polish.
 
 ## Not published (not in the reference facts)
 

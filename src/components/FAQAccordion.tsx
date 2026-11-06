@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { Plus } from "lucide-react"
+import { AnimatePresence, motion } from "framer-motion"
+import { accordionContent } from "./animations"
 
 export function FAQAccordion({
   items,
@@ -21,9 +22,30 @@ export function FAQAccordion({
               onClick={() => setOpen(active ? null : index)}
             >
               {item.question}
-              <Plus className={`h-4 w-4 shrink-0 text-brand transition ${active ? "rotate-45" : ""}`} />
+              <motion.span
+                animate={active ? "open" : "closed"}
+                variants={{
+                  open: { rotate: 45 },
+                  closed: { rotate: 0 },
+                }}
+                transition={{ duration: 0.25, ease: [0.24, 1, 0.32, 1] }}
+                className="h-4 w-4 shrink-0 text-brand"
+              />
             </button>
-            {active && <p className="px-4 pb-4 text-sm leading-relaxed text-muted">{item.answer}</p>}
+            <AnimatePresence>
+              {active && (
+                <motion.p
+                  variants={accordionContent}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  className="px-4 pb-4 text-sm leading-relaxed text-muted"
+                  layout
+                >
+                  {item.answer}
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
         )
       })}
